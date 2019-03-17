@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	
+	<class name="dao.Produit" table="PRODUITS">
+	
+		<id name="idProduit" column="ID_PRODUIT">
+			<generator class="native"></generator>  <!-- propriete auto incremente a ce champs  -->
+		</id>
+		
+		<property name="nom" column="NOM"> </property>   <!--  autre proprietes = ( not-null="true"  , unique="true" )  -->
+		<property name="description" column="DESCRIPTION">  </property>
+		<property name="prix" column="PRIX"></property> 
+		
+		<set name="categories" table="CAT_PROD"  inverse="true">       <!-- inverse="false" par defaut & table nommé "CAT_PROD" d'association  -->
+			<key column="ID_PRODUIT"></key>         <!--  table: produit [1..n] ________ [1..n] table:categorie  -->
+			<many-to-many class="dao.Categorie" column="ID_CATEGORIE"> </many-to-many>
+		 
+		</set>
+	</class>
+	
+</hibernate-mapping>
